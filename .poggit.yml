@@ -1,11 +1,8 @@
 --- # Poggit-CI Manifest. Open the CI at https://poggit.pmmp.io/ci/victoriovm/ItemCommand
-build-by-default: true
-branches:
-- main
 projects:
   ItemCommand:
     path: ""
     libs:
-      - src: jojoe77777/FormAPI/libFormAPI
-        version: ^2.1.0
+    - src: Vecnavium/FormsUI/FormsUI
+      version: ^1.0.0
 ...

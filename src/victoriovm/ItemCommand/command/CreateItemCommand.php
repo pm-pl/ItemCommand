@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace victoriovm\ItemCommand\command;
 
-use jojoe77777\FormAPI\CustomForm;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\player\Player;
 use pocketmine\plugin\Plugin;
 use pocketmine\plugin\PluginOwned;
 use pocketmine\plugin\PluginOwnedTrait;
+use Vecnavium\FormsUI\CustomForm;
 use victoriovm\ItemCommand\Main;
 
 class CreateItemCommand extends Command implements PluginOwned {
