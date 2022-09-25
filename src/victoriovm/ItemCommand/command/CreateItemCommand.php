@@ -20,7 +20,7 @@ class CreateItemCommand extends Command implements PluginOwned {
 
 	public function __construct() {
 		$this->plugin = Main::getInstance();
-		$this->setPermission("createitem.command");
+		$this->setPermission("itemcommand.command");
 		parent::__construct("createitem", "Create a custom item with command");
 	}
 

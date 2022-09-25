@@ -21,7 +21,7 @@ class Main extends PluginBase {
 	}
 
 	public function onEnable(): void {
-		$this->getServer()->getCommandMap()->register("itemcommand:", new CreateItemCommand());
+		$this->getServer()->getCommandMap()->register("itemcommand", new CreateItemCommand());
 		$this->getServer()->getPluginManager()->registerEvents(new EventListener(), $this);
 	}
 

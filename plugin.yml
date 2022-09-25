@@ -6,5 +6,5 @@ main: victoriovm\ItemCommand\Main
 description: "A simple plugin for PocketMine-MP to create interaction items"
 
 permissions: 
-  createitem.command:
+  itemcommand.command:
     default: op
