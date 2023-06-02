@@ -3,6 +3,5 @@ projects:
   ItemCommand:
     path: ""
     libs:
-    - src: Vecnavium/FormsUI/FormsUI
-      version: ^1.0.0
-...
+      - src: dktapps-pm-pl/pmforms/pmforms
+        version: ^2.1.0

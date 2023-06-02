@@ -8,34 +8,37 @@ use pocketmine\console\ConsoleCommandSender;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerInteractEvent;
 use pocketmine\event\player\PlayerItemUseEvent;
-use pocketmine\Server;
 use function str_replace;
 
 class EventListener implements Listener {
+	private ConsoleCommandSender $consoleCommandSender;
+
+	public function __construct(private Main $plugin) {
+		$server = $this->plugin->getServer();
+		$this->consoleCommandSender = new ConsoleCommandSender($server, $server->getLanguage());
+	}
+
 	public function onPlayerInteract(PlayerInteractEvent $event): void {
 		$item = $event->getItem();
-		$command = Main::getInstance()->getItemCommand($item);
-
-		if ($command === null) {
-			return;
-		}
-
-		$event->cancel();
 		$player = $event->getPlayer();
-		$command = str_replace("{PLAYER}", '"' . $player->getName() . '"', $command);
-		Server::getInstance()->dispatchCommand(
-			new ConsoleCommandSender(Server::getInstance(), Server::getInstance()->getLanguage()),
-			$command
-		);
-		$player->getInventory()->setItemInHand($item->setCount($item->getCount() - 1));
+
+		$command = $this->plugin->getItemCommand($item);
+
+		if ($command !== null) {
+			$event->cancel();
+
+			$command = str_replace("{PLAYER}", '"' . $player->getName() . '"', $command);
+			$this->plugin->getServer()->dispatchCommand($this->consoleCommandSender, $command);
+
+			$player->getInventory()->setItemInHand($item->setCount($item->getCount() - 1));
+		}
 	}
 
 	public function onPlayerItemUse(PlayerItemUseEvent $event): void {
 		$item = $event->getItem();
 
-		if (Main::getInstance()->getItemCommand($item) === null) {
-			return;
+		if ($this->plugin->getItemCommand($item) !== null) {
+			$event->cancel();
 		}
-		$event->cancel();
 	}
 }

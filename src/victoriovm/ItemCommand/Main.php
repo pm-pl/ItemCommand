@@ -6,23 +6,16 @@ namespace victoriovm\ItemCommand;
 
 use pocketmine\item\Item;
 use pocketmine\plugin\PluginBase;
-use pocketmine\utils\SingletonTrait;
 use victoriovm\ItemCommand\command\CreateItemCommand;
 
 use function is_null;
 
 class Main extends PluginBase {
-	use SingletonTrait;
-
 	public const TAG_ITEM_COMMAND = "item.command.tag";
 
-	public function onLoad(): void {
-		$this->setInstance($this);
-	}
-
-	public function onEnable(): void {
-		$this->getServer()->getCommandMap()->register("itemcommand", new CreateItemCommand());
-		$this->getServer()->getPluginManager()->registerEvents(new EventListener(), $this);
+	protected function onEnable(): void {
+		$this->getServer()->getCommandMap()->register("itemcommand", new CreateItemCommand($this));
+		$this->getServer()->getPluginManager()->registerEvents(new EventListener($this), $this);
 	}
 
 	public function makeItem(Item $item, string $command, ?string $customName = null): Item {
@@ -31,7 +24,6 @@ class Main extends PluginBase {
 		}
 		$tags = $item->getNamedTag();
 		$tags->setString(self::TAG_ITEM_COMMAND, $command);
-		$item->setNamedTag($tags);
 
 		return $item;
 	}
