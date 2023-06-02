@@ -1,10 +1,10 @@
 name: "ItemCommand"
 author: "victoriovm"
 api: 5.0.0
-version: 1.0.0
+version: 1.1.0
 main: victoriovm\ItemCommand\Main
 description: "A simple plugin for PocketMine-MP to create interaction items"
 
-permissions: 
+permissions:
   itemcommand.command:
     default: op
